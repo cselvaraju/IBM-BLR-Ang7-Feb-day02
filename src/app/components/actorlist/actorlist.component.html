@@ -1,0 +1,93 @@
+<div>
+  <h3>List of Actors</h3>
+  <!-- <ul>
+    <li *ngFor="let actor of actorList">
+      Name: {{actor.name}} - City: {{actor.city}}
+    </li>
+  </ul> -->
+  <button class="btn btn-primary" (click)="toggleTable()">{{btnText}}</button>
+  <div *ngIf="tblFlag">
+    <table class="table table-dark table-striped table-hover">
+      <thead>
+        <th>Name</th>
+        <th>City</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let actor of actorList; index as n" (dblclick)="editActor(n)" (keyup)="handleKey(n, $event)">
+          <td>
+            <span *ngIf="selectedIndex !== n">
+              {{actor.name}}
+            </span>
+            <span *ngIf="selectedIndex === n">
+              <input type="text" [(ngModel)]="actor.name">
+            </span>
+          </td>
+          <td>
+            <span *ngIf="selectedIndex !== n">
+              {{actor.city}}
+            </span>
+            <span *ngIf="selectedIndex === n">
+              <input type="text" [(ngModel)]="actor.city">
+            </span>
+          </td>
+          <td>
+            <span *ngIf="selectedIndex !== n">
+              <button class="btn btn-primary" (click)="editActor(n)">
+                <i class="fa fa-pencil"></i>
+              </button>
+              <button class="btn btn-danger" (click)="deleteActor(n)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </span>
+            <span *ngIf="selectedIndex === n">
+              <button class="btn btn-primary" (click)="saveActor(n)">
+                <i class="fa fa-save"></i>
+              </button>
+              <button class="btn btn-primary" (click)="cancelEdit(n)">
+                <i class="fa fa-undo"></i>
+              </button>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-secondary">
+                <i class="fa fa-step-backward"></i>
+              </button>
+              <button type="button" class="btn btn-secondary">
+                <i class="fa fa-caret-left"></i>
+              </button>
+              <button type="button" class="btn btn-secondary">
+                <i class="fa fa-caret-right"></i>
+              </button>
+              <button type="button" class="btn btn-secondary">
+                <i class="fa fa-step-forward"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button (click)="btnClicked()">Click Me</button>
+
+  <div>
+    <h3>Add Actor Form</h3>
+    <label>
+      Name:
+      <input type="text" [(ngModel)]="newName">
+    </label>
+    <br>
+    <label>
+      City:
+      <input type="text" [(ngModel)]="newCity">
+    </label>
+    <br>
+    <button (click)="addActor()">
+      <i class="fa fa-user-plus"></i>
+    </button>
+  </div>
+</div>
